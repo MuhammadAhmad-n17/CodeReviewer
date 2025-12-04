@@ -29,6 +29,12 @@ export const githubLogin = (req, res) => {
 export const githubCallback = async (req, res) => {
   try {
     const code = req.query.code;
+    const error = req.query.error;
+
+    if (error) {
+      console.error("GitHub OAuth error:", error);
+      return res.redirect(`${process.env.CLIENT_URL}?error=${error}`);
+    }
 
     if (!code) {
       return res
@@ -50,9 +56,9 @@ export const githubCallback = async (req, res) => {
 
     if (!access_token) {
       console.error("No access token received:", tokenRes.data);
-      return res
-        .status(400)
-        .json({ message: "Failed to get GitHub access token" });
+      return res.redirect(
+        `${process.env.CLIENT_URL}?error=failed_to_get_token`
+      );
     }
 
     const profile = await axios.get("https://api.github.com/user", {
@@ -76,15 +82,15 @@ export const githubCallback = async (req, res) => {
     }
 
     const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    const clientUrl = process.env.CLIENT_URL || "http://localhost:3000";
+    const redirectUrl = `${clientUrl}/auth-success?token=${jwtToken}`;
 
-    return res.redirect(
-      `${process.env.CLIENT_URL}/auth-success?token=${jwtToken}`
-    );
+    console.log("🔐 OAuth Success - Redirecting to:", redirectUrl);
+    return res.redirect(redirectUrl);
   } catch (err) {
     console.error("GitHub callback error:", err.message);
-    return res
-      .status(500)
-      .json({ message: "Authentication failed", error: err.message });
+    const clientUrl = process.env.CLIENT_URL || "http://localhost:3000";
+    return res.redirect(`${clientUrl}?error=authentication_failed`);
   }
 };
 
