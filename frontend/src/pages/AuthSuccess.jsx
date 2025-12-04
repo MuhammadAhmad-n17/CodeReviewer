@@ -23,17 +23,32 @@ export default function AuthSuccess() {
 
         // Fetch user data
         const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
-        const userRes = await axios.get(`${base}/auth/me`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        console.log("🔐 Auth Success - API Base:", base);
+        console.log("🔐 Auth Success - Token:", token.substring(0, 20) + "...");
 
-        // Store user data
-        localStorage.setItem("user", JSON.stringify(userRes.data));
+        try {
+          const userRes = await axios.get(`${base}/auth/me`, {
+            headers: { Authorization: `Bearer ${token}` },
+            timeout: 10000, // 10 second timeout
+          });
+          console.log("✅ User data fetched:", userRes.data);
 
-        // Redirect to dashboard
-        setTimeout(() => navigate("/dashboard", { replace: true }), 1500);
+          // Store user data
+          localStorage.setItem("user", JSON.stringify(userRes.data));
+
+          // Redirect to dashboard
+          setTimeout(() => navigate("/dashboard", { replace: true }), 1500);
+        } catch (apiErr) {
+          console.error("❌ Failed to fetch user data:", apiErr.message);
+          console.error("Status:", apiErr.response?.status);
+          console.error("Response:", apiErr.response?.data);
+
+          // Even if user fetch fails, redirect with token (user data can be fetched later)
+          console.warn("⚠️ Redirecting to dashboard anyway with stored token");
+          setTimeout(() => navigate("/dashboard", { replace: true }), 2000);
+        }
       } catch (err) {
-        console.error("Authentication failed:", err);
+        console.error("❌ Authentication failed:", err);
         navigate("/", { replace: true });
       }
     };

@@ -96,6 +96,13 @@ export const githubCallback = async (req, res) => {
 
 export const getCurrentUser = async (req, res) => {
   try {
+    if (!req.user) {
+      console.error("❌ getCurrentUser: No user in request");
+      return res.status(401).json({ message: "User not authenticated" });
+    }
+
+    console.log("✅ getCurrentUser: Returning user data for", req.user._id);
+
     res.json({
       id: req.user._id,
       githubId: req.user.githubId,
@@ -106,6 +113,9 @@ export const getCurrentUser = async (req, res) => {
       createdAt: req.user.createdAt,
     });
   } catch (err) {
-    res.status(500).json({ message: "Failed to fetch user" });
+    console.error("❌ getCurrentUser error:", err.message);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch user", error: err.message });
   }
 };
