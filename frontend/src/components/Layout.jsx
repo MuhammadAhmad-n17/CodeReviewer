@@ -55,7 +55,11 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className={`flex h-screen flex-col md:flex-row ${isDark ? "bg-slate-900" : "bg-slate-50"}`}>
+    <div
+      className={`flex h-screen flex-col md:flex-row ${
+        isDark ? "bg-slate-900" : "bg-slate-50"
+      }`}
+    >
       {/* Sidebar */}
       <aside
         className={`fixed md:relative z-40 w-64 h-screen md:h-auto transform transition-transform duration-300 ${
@@ -280,7 +284,11 @@ export default function Layout({ children }) {
               } rounded-lg transition-colors flex-shrink-0`}
               title="Logout"
             >
-              <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                className="w-4 h-4 sm:w-5 sm:h-5"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
               </svg>
             </button>

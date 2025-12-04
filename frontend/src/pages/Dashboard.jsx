@@ -77,23 +77,23 @@ export default function Dashboard() {
           ) : (
             <>
               {/* Metrics Grid - Responsive */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8 animate-stagger">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8 animate-stagger">
                 {/* Total Reviews Card */}
                 <div
                   className={`${
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-xl p-4 sm:p-6 border shadow-sm hover:shadow-md transition-shadow hover-lift animate-fade-in-up`}
+                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
                 >
-                  <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex items-start gap-3">
                     <div
-                      className={`p-2 sm:p-3 ${
+                      className={`p-2 ${
                         isDark ? "bg-blue-900/30" : "bg-blue-100"
                       } rounded-lg flex-shrink-0`}
                     >
                       <svg
-                        className={`w-5 h-5 sm:w-6 sm:h-6 ${
+                        className={`w-5 h-5 ${
                           isDark ? "text-blue-400" : "text-blue-600"
                         }`}
                         viewBox="0 0 24 24"
@@ -102,16 +102,16 @@ export default function Dashboard() {
                         <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-sm font-medium`}
+                        } text-xs sm:text-sm font-medium truncate`}
                       >
                         Total Reviews
                       </p>
                       <p
-                        className={`text-3xl font-bold ${
+                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
@@ -127,16 +127,16 @@ export default function Dashboard() {
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-xl p-6 border shadow-sm hover:shadow-md transition-shadow hover-lift animate-fade-in-up`}
+                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-start gap-3">
                     <div
-                      className={`p-3 ${
+                      className={`p-2 ${
                         isDark ? "bg-green-900/30" : "bg-green-100"
-                      } rounded-lg`}
+                      } rounded-lg flex-shrink-0`}
                     >
                       <svg
-                        className={`w-6 h-6 ${
+                        className={`w-5 h-5 ${
                           isDark ? "text-green-400" : "text-green-600"
                         }`}
                         viewBox="0 0 24 24"
@@ -145,113 +145,112 @@ export default function Dashboard() {
                         <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-sm font-medium`}
+                        } text-xs sm:text-sm font-medium truncate`}
                       >
                         PRs Analyzed
                       </p>
                       <p
-                        className={`text-3xl font-bold ${
+                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
-                        {stats?.prsAnalyzed || 0}
+                        {stats?.pullRequestsAnalyzed || 0}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* High Severity Issues Card */}
+                {/* Issues Found Card */}
                 <div
                   className={`${
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-xl p-6 border shadow-sm hover:shadow-md transition-shadow hover-lift animate-fade-in-up`}
+                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-start gap-3">
                     <div
-                      className={`p-3 ${
+                      className={`p-2 ${
                         isDark ? "bg-red-900/30" : "bg-red-100"
-                      } rounded-lg`}
+                      } rounded-lg flex-shrink-0`}
                     >
                       <svg
-                        className={`w-6 h-6 ${
+                        className={`w-5 h-5 ${
                           isDark ? "text-red-400" : "text-red-600"
                         }`}
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >
-                        <path d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
                       </svg>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-sm font-medium`}
+                        } text-xs sm:text-sm font-medium truncate`}
                       >
-                        High Severity
+                        Issues Found
                       </p>
                       <p
-                        className={`text-3xl font-bold ${
+                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
-                        {stats?.highSeverity || 0}
+                        {stats?.issuesFound || 0}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Avg Review Time Card */}
+                {/* Avg. Rating Card */}
                 <div
                   className={`${
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-xl p-6 border shadow-sm hover:shadow-md transition-shadow hover-lift animate-fade-in-up`}
+                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-start gap-3">
                     <div
-                      className={`p-3 ${
-                        isDark ? "bg-purple-900/30" : "bg-purple-100"
-                      } rounded-lg`}
+                      className={`p-2 ${
+                        isDark ? "bg-yellow-900/30" : "bg-yellow-100"
+                      } rounded-lg flex-shrink-0`}
                     >
                       <svg
-                        className={`w-6 h-6 ${
-                          isDark ? "text-purple-400" : "text-purple-600"
+                        className={`w-5 h-5 ${
+                          isDark ? "text-yellow-400" : "text-yellow-600"
                         }`}
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >
-                        <path d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z" />
                       </svg>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-sm font-medium`}
+                        } text-xs sm:text-sm font-medium truncate`}
                       >
-                        Avg Review Time
+                        Avg. Rating
                       </p>
                       <p
-                        className={`text-3xl font-bold ${
+                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
-                        {stats?.avgTime || 0}s
+                        {stats?.averageRating ? stats.averageRating.toFixed(1) : "0"}
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Quick Actions Section */}
+                {/* Quick Actions Section */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 animate-stagger">
                 {/* Start New Review */}
                 <div
