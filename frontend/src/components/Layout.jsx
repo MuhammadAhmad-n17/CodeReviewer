@@ -8,6 +8,7 @@ export default function Layout({ children }) {
   const navigate = useNavigate();
   const { isDark } = useTheme();
   const [user, setUser] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -54,32 +55,34 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className={`flex h-screen ${isDark ? "bg-slate-900" : "bg-slate-50"}`}>
+    <div className={`flex h-screen flex-col md:flex-row ${isDark ? "bg-slate-900" : "bg-slate-50"}`}>
       {/* Sidebar */}
       <aside
-        className={`w-64 ${
+        className={`fixed md:relative z-40 w-64 h-screen md:h-auto transform transition-transform duration-300 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 ${
           isDark ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"
-        } border-r flex flex-col shadow-sm transition-colors`}
+        } border-r flex flex-col shadow-sm md:shadow-none`}
       >
         {/* Brand */}
         <div
-          className={`p-6 border-b ${
+          className={`p-4 sm:p-6 border-b ${
             isDark ? "border-slate-700" : "border-slate-200"
           }`}
         >
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-linear-to-br from-purple-600 to-indigo-600 rounded-lg">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="p-2 bg-linear-to-br from-purple-600 to-indigo-600 rounded-lg flex-shrink-0">
               <svg
-                className="w-5 h-5 text-white"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
                 <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
               </svg>
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <h1
-                className={`text-xl font-bold ${
+                className={`text-lg sm:text-xl font-bold truncate ${
                   isDark ? "text-white" : "text-slate-900"
                 }`}
               >
@@ -97,7 +100,7 @@ export default function Layout({ children }) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2">
+        <nav className="flex-1 p-3 sm:p-4 space-y-1 sm:space-y-2 overflow-y-auto">
           <Link
             to="/dashboard"
             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
@@ -189,7 +192,7 @@ export default function Layout({ children }) {
 
         {/* Footer */}
         <div
-          className={`p-4 border-t ${
+          className={`p-3 sm:p-4 border-t ${
             isDark
               ? "border-slate-700 text-slate-500"
               : "border-slate-200 text-slate-500"
@@ -199,23 +202,32 @@ export default function Layout({ children }) {
         </div>
       </aside>
 
+      {/* Overlay for mobile sidebar */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/50 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden w-full">
         {/* Header */}
         <header
-          className={`h-16 ${
+          className={`h-14 sm:h-16 ${
             isDark
               ? "bg-slate-800 border-slate-700"
               : "bg-white border-slate-200"
-          } border-b flex items-center justify-between px-6 shadow-sm transition-colors`}
+          } border-b flex items-center justify-between px-4 sm:px-6 shadow-sm transition-colors`}
         >
           <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
             className={`p-2 ${
               isDark ? "hover:bg-slate-700" : "hover:bg-slate-100"
-            } rounded-lg transition-colors lg:hidden`}
+            } rounded-lg transition-colors md:hidden`}
           >
             <svg
-              className={`w-6 h-6 ${
+              className={`w-5 h-5 sm:w-6 sm:h-6 ${
                 isDark ? "text-slate-400" : "text-slate-600"
               }`}
               viewBox="0 0 24 24"
@@ -225,10 +237,10 @@ export default function Layout({ children }) {
             </svg>
           </button>
 
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-linear-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center">
+          <div className="flex items-center gap-4 sm:gap-6 ml-auto">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-linear-to-br from-purple-600 to-indigo-600 rounded-full flex-shrink-0 flex items-center justify-center">
                   {user?.avatar ? (
                     <img
                       src={user.avatar}
@@ -236,21 +248,21 @@ export default function Layout({ children }) {
                       className="w-full h-full rounded-full object-cover"
                     />
                   ) : (
-                    <span className="text-white text-sm font-bold">
+                    <span className="text-white text-xs sm:text-sm font-bold">
                       {getInitials(user?.name)}
                     </span>
                   )}
                 </div>
-                <div className="hidden sm:block">
+                <div className="hidden sm:block min-w-0">
                   <div
-                    className={`text-sm font-semibold ${
+                    className={`text-sm font-semibold truncate ${
                       isDark ? "text-white" : "text-slate-900"
                     }`}
                   >
                     {user?.name || "Loading..."}
                   </div>
                   <div
-                    className={`text-xs ${
+                    className={`text-xs truncate ${
                       isDark ? "text-slate-400" : "text-slate-500"
                     }`}
                   >
@@ -265,10 +277,10 @@ export default function Layout({ children }) {
                 isDark
                   ? "text-slate-400 hover:bg-red-900/30 hover:text-red-400"
                   : "text-slate-600 hover:bg-red-50 hover:text-red-600"
-              } rounded-lg transition-colors`}
+              } rounded-lg transition-colors flex-shrink-0`}
               title="Logout"
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
               </svg>
             </button>

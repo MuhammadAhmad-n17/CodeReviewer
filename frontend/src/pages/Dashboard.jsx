@@ -38,24 +38,24 @@ export default function Dashboard() {
   return (
     <Layout>
       <div
-        className={`p-8 ${
+        className={`p-4 sm:p-8 ${
           isDark ? "bg-slate-900" : "bg-slate-50"
         } min-h-screen transition-colors`}
       >
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
-          <div className="mb-12">
+          <div className="mb-6 sm:mb-12">
             <h1
-              className={`text-4xl font-bold ${
+              className={`text-2xl sm:text-4xl font-bold ${
                 isDark ? "text-white" : "text-slate-900"
-              } mb-2`}
+              } mb-1 sm:mb-2`}
             >
               Welcome back, {user?.login || "Developer"}!
             </h1>
             <p
               className={`${
                 isDark ? "text-slate-400" : "text-slate-600"
-              } text-lg`}
+              } text-sm sm:text-lg`}
             >
               Here's your code review activity
             </p>
@@ -64,36 +64,36 @@ export default function Dashboard() {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20">
               <div
-                className={`w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-4`}
+                className={`w-12 h-12 sm:w-16 sm:h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-4`}
               ></div>
               <p
                 className={`${
                   isDark ? "text-slate-400" : "text-slate-600"
-                } text-lg`}
+                } text-sm sm:text-lg`}
               >
                 Loading your dashboard...
               </p>
             </div>
           ) : (
             <>
-              {/* Metrics Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-stagger">
+              {/* Metrics Grid - Responsive */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8 animate-stagger">
                 {/* Total Reviews Card */}
                 <div
                   className={`${
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-xl p-6 border shadow-sm hover:shadow-md transition-shadow hover-lift animate-fade-in-up`}
+                  } rounded-xl p-4 sm:p-6 border shadow-sm hover:shadow-md transition-shadow hover-lift animate-fade-in-up`}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     <div
-                      className={`p-3 ${
+                      className={`p-2 sm:p-3 ${
                         isDark ? "bg-blue-900/30" : "bg-blue-100"
-                      } rounded-lg`}
+                      } rounded-lg flex-shrink-0`}
                     >
                       <svg
-                        className={`w-6 h-6 ${
+                        className={`w-5 h-5 sm:w-6 sm:h-6 ${
                           isDark ? "text-blue-400" : "text-blue-600"
                         }`}
                         viewBox="0 0 24 24"
