@@ -2,47 +2,87 @@ import { githubApi } from "../utils/githubapi.js";
 import { groq, GROQ_MODEL } from "../utils/groqClient.js";
 
 export const getRepos = async (req, res) => {
-  const data = await githubApi(req.user.githubAccessToken, "/user/repos");
-  res.json(data);
+  try {
+    const data = await githubApi(req.user.githubAccessToken, "/user/repos");
+    res.json(data);
+  } catch (err) {
+    console.error("getRepos error:", err.message);
+    res.status(err.response?.status || 500).json({
+      message: "Failed to fetch repositories",
+      error: err.message,
+    });
+  }
 };
 
 export const getPullRequests = async (req, res) => {
-  const { owner, repo } = req.params;
-  const data = await githubApi(
-    req.user.githubAccessToken,
-    `/repos/${owner}/${repo}/pulls`
-  );
-  res.json(data);
+  try {
+    const { owner, repo } = req.params;
+    const data = await githubApi(
+      req.user.githubAccessToken,
+      `/repos/${owner}/${repo}/pulls`
+    );
+    res.json(data);
+  } catch (err) {
+    console.error("getPullRequests error:", err.message);
+    res.status(err.response?.status || 500).json({
+      message: "Failed to fetch pull requests",
+      error: err.message,
+    });
+  }
 };
 
 export const getPullRequestFiles = async (req, res) => {
-  const { owner, repo, number } = req.params;
+  try {
+    const { owner, repo, number } = req.params;
 
-  const data = await githubApi(
-    req.user.githubAccessToken,
-    `/repos/${owner}/${repo}/pulls/${number}/files`
-  );
+    const data = await githubApi(
+      req.user.githubAccessToken,
+      `/repos/${owner}/${repo}/pulls/${number}/files`
+    );
 
-  res.json(data);
+    res.json(data);
+  } catch (err) {
+    console.error("getPullRequestFiles error:", err.message);
+    res.status(err.response?.status || 500).json({
+      message: "Failed to fetch pull request files",
+      error: err.message,
+    });
+  }
 };
 
 export const getCommits = async (req, res) => {
-  const { owner, repo } = req.params;
-  const data = await githubApi(
-    req.user.githubAccessToken,
-    `/repos/${owner}/${repo}/commits`
-  );
-  res.json(data);
+  try {
+    const { owner, repo } = req.params;
+    const data = await githubApi(
+      req.user.githubAccessToken,
+      `/repos/${owner}/${repo}/commits`
+    );
+    res.json(data);
+  } catch (err) {
+    console.error("getCommits error:", err.message);
+    res.status(err.response?.status || 500).json({
+      message: "Failed to fetch commits",
+      error: err.message,
+    });
+  }
 };
 
 export const getCommitFiles = async (req, res) => {
-  const { owner, repo, sha } = req.params;
-  const data = await githubApi(
-    req.user.githubAccessToken,
-    `/repos/${owner}/${repo}/commits/${sha}`
-  );
-  // GitHub commit API returns files array on commit detail
-  res.json(data.files || []);
+  try {
+    const { owner, repo, sha } = req.params;
+    const data = await githubApi(
+      req.user.githubAccessToken,
+      `/repos/${owner}/${repo}/commits/${sha}`
+    );
+    // GitHub commit API returns files array on commit detail
+    res.json(data.files || []);
+  } catch (err) {
+    console.error("getCommitFiles error:", err.message);
+    res.status(err.response?.status || 500).json({
+      message: "Failed to fetch commit files",
+      error: err.message,
+    });
+  }
 };
 
 // ----------------------
