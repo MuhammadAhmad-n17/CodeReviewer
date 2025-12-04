@@ -84,16 +84,16 @@ export default function Dashboard() {
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
+                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2 w-full">
                     <div
                       className={`p-2 ${
                         isDark ? "bg-blue-900/30" : "bg-blue-100"
-                      } rounded-lg flex-shrink-0`}
+                      } rounded-lg shrink-0`}
                     >
                       <svg
-                        className={`w-5 h-5 ${
+                        className={`w-4 h-4 sm:w-5 sm:h-5 ${
                           isDark ? "text-blue-400" : "text-blue-600"
                         }`}
                         viewBox="0 0 24 24"
@@ -106,12 +106,12 @@ export default function Dashboard() {
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-xs sm:text-sm font-medium truncate`}
+                        } text-xs font-medium truncate`}
                       >
                         Total Reviews
                       </p>
                       <p
-                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
+                        className={`text-xl sm:text-2xl font-bold mt-1 truncate ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
@@ -127,16 +127,16 @@ export default function Dashboard() {
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
+                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2 w-full">
                     <div
                       className={`p-2 ${
                         isDark ? "bg-green-900/30" : "bg-green-100"
-                      } rounded-lg flex-shrink-0`}
+                      } rounded-lg shrink-0`}
                     >
                       <svg
-                        className={`w-5 h-5 ${
+                        className={`w-4 h-4 sm:w-5 sm:h-5 ${
                           isDark ? "text-green-400" : "text-green-600"
                         }`}
                         viewBox="0 0 24 24"
@@ -149,12 +149,12 @@ export default function Dashboard() {
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-xs sm:text-sm font-medium truncate`}
+                        } text-xs font-medium truncate`}
                       >
                         PRs Analyzed
                       </p>
                       <p
-                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
+                        className={`text-xl sm:text-2xl font-bold mt-1 truncate ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
@@ -170,16 +170,16 @@ export default function Dashboard() {
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
+                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow overflow-hidden`}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2 w-full">
                     <div
                       className={`p-2 ${
                         isDark ? "bg-red-900/30" : "bg-red-100"
-                      } rounded-lg flex-shrink-0`}
+                      } rounded-lg shrink-0`}
                     >
                       <svg
-                        className={`w-5 h-5 ${
+                        className={`w-4 h-4 sm:w-5 sm:h-5 ${
                           isDark ? "text-red-400" : "text-red-600"
                         }`}
                         viewBox="0 0 24 24"
@@ -192,12 +192,12 @@ export default function Dashboard() {
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-xs sm:text-sm font-medium truncate`}
+                        } text-xs font-medium truncate`}
                       >
                         Issues Found
                       </p>
                       <p
-                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
+                        className={`text-xl sm:text-2xl font-bold mt-1 truncate ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
@@ -209,20 +209,20 @@ export default function Dashboard() {
 
                 {/* Avg. Rating Card */}
                 <div
-                  className={`${
+                  className={`rounded-lg sm:rounded-xl p-4 border overflow-hidden ${
                     isDark
                       ? "bg-slate-800 border-slate-700"
                       : "bg-white border-slate-200"
-                  } rounded-lg sm:rounded-xl p-4 border shadow-sm hover:shadow-md transition-shadow`}
+                  } shadow-sm transition-colors`}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2 w-full">
                     <div
-                      className={`p-2 ${
+                      className={`p-2 rounded-lg shrink-0 ${
                         isDark ? "bg-yellow-900/30" : "bg-yellow-100"
-                      } rounded-lg flex-shrink-0`}
+                      }`}
                     >
                       <svg
-                        className={`w-5 h-5 ${
+                        className={`w-4 h-4 sm:w-5 sm:h-5 ${
                           isDark ? "text-yellow-400" : "text-yellow-600"
                         }`}
                         viewBox="0 0 24 24"
@@ -235,12 +235,12 @@ export default function Dashboard() {
                       <p
                         className={`${
                           isDark ? "text-slate-400" : "text-slate-600"
-                        } text-xs sm:text-sm font-medium truncate`}
+                        } text-xs font-medium truncate`}
                       >
                         Avg. Rating
                       </p>
                       <p
-                        className={`text-2xl sm:text-3xl font-bold mt-1 ${
+                        className={`text-xl sm:text-2xl font-bold mt-1 truncate ${
                           isDark ? "text-white" : "text-slate-900"
                         }`}
                       >
